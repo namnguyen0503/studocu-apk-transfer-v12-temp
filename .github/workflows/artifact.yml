@@ -1,0 +1,16 @@
+name: APK Artifact
+on: workflow_dispatch
+jobs:
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode APK
+        run: |
+          base64 -d apk.b64.txt > Studocu-MHT-to-DOCX-v1.2.apk
+          sha256sum Studocu-MHT-to-DOCX-v1.2.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Studocu-MHT-to-DOCX-v1.2
+          path: Studocu-MHT-to-DOCX-v1.2.apk
+          if-no-files-found: error
